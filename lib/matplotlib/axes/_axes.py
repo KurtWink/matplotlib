@@ -7536,6 +7536,7 @@ class Axes(_AxesBase):
         mins = []
         maxes = []
         medians = []
+        percentiles = []
 
         # Collections to be returned
         artists = {}
@@ -7592,6 +7593,7 @@ class Axes(_AxesBase):
             mins.append(stats['min'])
             maxes.append(stats['max'])
             medians.append(stats['median'])
+            percentiles.appent(stats['percentiles'])
         artists['bodies'] = bodies
 
         # Render means
@@ -7614,6 +7616,13 @@ class Axes(_AxesBase):
                                              pmins,
                                              pmaxes,
                                              colors=edgecolor)
+
+        artists['percentiles'] = []
+        for i in range(0, len(percentiles)):
+            artists['percentiles'].append(perp_lines(percentiles[i], 
+                                                     pmins[i], 
+                                                     pmaxes[i], 
+                                                     colors='k'))
 
         return artists
 
