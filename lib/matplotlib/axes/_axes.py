@@ -7623,6 +7623,7 @@ class Axes(_AxesBase):
                                                      pmins[i], 
                                                      pmaxes[i], 
                                                      colors='k'))
+
         return artists
 
     def tricontour(self, *args, **kwargs):
