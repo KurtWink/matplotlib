@@ -2111,6 +2111,7 @@ def violin_stats(X, method, points=100):
         stats['median'] = np.median(x)
         stats['min'] = min_val
         stats['max'] = max_val
+        stats['percentiles'] = np.percentile(x, [1.0, 35.0, 65.0, 99.0]) ###input params should be used instead of this list
 
         # Append to output
         vpstats.append(stats)
