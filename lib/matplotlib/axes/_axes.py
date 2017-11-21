@@ -7593,7 +7593,7 @@ class Axes(_AxesBase):
             mins.append(stats['min'])
             maxes.append(stats['max'])
             medians.append(stats['median'])
-            percentiles.appent(stats['percentiles'])
+            percentiles.append(stats['percentiles'])
         artists['bodies'] = bodies
 
         # Render means
@@ -7623,7 +7623,6 @@ class Axes(_AxesBase):
                                                      pmins[i], 
                                                      pmaxes[i], 
                                                      colors='k'))
-
         return artists
 
     def tricontour(self, *args, **kwargs):
