@@ -7617,12 +7617,11 @@ class Axes(_AxesBase):
                                              pmaxes,
                                              colors=edgecolor)
 
+        # Render percentiles
         artists['percentiles'] = []
-        for i in range(0, len(percentiles)):
-            artists['percentiles'].append(perp_lines(percentiles[i], 
-                                                     pmins[i], 
-                                                     pmaxes[i], 
-                                                     colors='k'))
+        for ps, pmin, pmax in zip(percentiles, pmins, pmaxes):
+            artists['percentiles'].append(perp_lines(ps, pmin, pmax,
+                                          colors='k')
 
         return artists
 
