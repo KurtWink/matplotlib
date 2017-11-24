@@ -7621,7 +7621,7 @@ class Axes(_AxesBase):
         artists['percentiles'] = []
         for ps, pmin, pmax in zip(percentiles, pmins, pmaxes):
             artists['percentiles'].append(perp_lines(ps, pmin, pmax,
-                                          colors='k')
+                                          colors='k'))
 
         return artists
 
