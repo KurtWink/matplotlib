@@ -3648,7 +3648,7 @@ def triplot(*args, **kwargs):
 @_autogen_docstring(Axes.violinplot)
 def violinplot(dataset, positions=None, vert=True, widths=0.5, showmeans=False,
                showextrema=True, showmedians=False, points=100, bw_method=None,
-               hold=None, data=None):
+               hold=None, data=None, showpercentiles=False):
     ax = gca()
     # Deprecated: allow callers to override the hold state
     # by passing hold=True|False
@@ -3663,7 +3663,8 @@ def violinplot(dataset, positions=None, vert=True, widths=0.5, showmeans=False,
         ret = ax.violinplot(dataset, positions=positions, vert=vert,
                             widths=widths, showmeans=showmeans,
                             showextrema=showextrema, showmedians=showmedians,
-                            points=points, bw_method=bw_method, data=data)
+                            points=points, showpercentiles=showpercentiles,
+                            bw_method=bw_method, data=data)
     finally:
         ax._hold = washold
 
