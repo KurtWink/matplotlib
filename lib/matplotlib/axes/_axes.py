@@ -7344,7 +7344,7 @@ class Axes(_AxesBase):
     @_preprocess_data(replace_names=["dataset"], label_namer=None)
     def violinplot(self, dataset, positions=None, vert=True, widths=0.5,
                    showmeans=False, showextrema=True, showmedians=False,
-                   points=100, bw_method=None):
+                   showpercentiles=False, points=100, bw_method=None):
         """
         Make a violin plot.
 
@@ -7439,10 +7439,11 @@ class Axes(_AxesBase):
         vpstats = cbook.violin_stats(dataset, _kde_method, points=points)
         return self.violin(vpstats, positions=positions, vert=vert,
                            widths=widths, showmeans=showmeans,
-                           showextrema=showextrema, showmedians=showmedians)
+                           showextrema=showextrema, showmedians=showmedians,
+                           showpercentiles=showpercentiles)
 
     def violin(self, vpstats, positions=None, vert=True, widths=0.5,
-               showmeans=False, showextrema=True, showmedians=False):
+               showmeans=False, showextrema=True, showmedians=False, showpercentiles=False):
         """Drawing function for violin plots.
 
         Draw a violin plot for each column of `vpstats`. Each filled area
@@ -7616,13 +7617,14 @@ class Axes(_AxesBase):
                                              pmins,
                                              pmaxes,
                                              colors=edgecolor)
-
-        artists['percentiles'] = []
-        for i in range(0, len(percentiles)):
-            artists['percentiles'].append(perp_lines(percentiles[i], 
-                                                     pmins[i], 
-                                                     pmaxes[i], 
-                                                     colors='k'))
+        # Render percentiles
+        if showpercentiles:
+            artists['percentiles'] = []
+            for i in range(0, len(percentiles)):
+                artists['percentiles'].append(perp_lines(percentiles[i],
+                                                         pmins[i],
+                                                         pmaxes[i],
+                                                         colors='k'))
 
         return artists
 
