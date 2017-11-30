@@ -7344,7 +7344,7 @@ class Axes(_AxesBase):
     @_preprocess_data(replace_names=["dataset"], label_namer=None)
     def violinplot(self, dataset, positions=None, vert=True, widths=0.5,
                    showmeans=False, showextrema=True, showmedians=False,
-                   showpercentiles=False, points=100, bw_method=None):
+                   percentiles=[], points=100, bw_method=None):
         """
         Make a violin plot.
 
@@ -7436,14 +7436,14 @@ class Axes(_AxesBase):
             kde = mlab.GaussianKDE(X, bw_method)
             return kde.evaluate(coords)
 
-        vpstats = cbook.violin_stats(dataset, _kde_method, points=points)
+        vpstats = cbook.violin_stats(dataset, _kde_method, points=points,
+                           percentiles=percentiles)
         return self.violin(vpstats, positions=positions, vert=vert,
                            widths=widths, showmeans=showmeans,
-                           showextrema=showextrema, showmedians=showmedians,
-                           showpercentiles=showpercentiles)
+                           showextrema=showextrema, showmedians=showmedians)
 
     def violin(self, vpstats, positions=None, vert=True, widths=0.5,
-               showmeans=False, showextrema=True, showmedians=False, showpercentiles=False):
+               showmeans=False, showextrema=True, showmedians=False):
         """Drawing function for violin plots.
 
         Draw a violin plot for each column of `vpstats`. Each filled area
@@ -7613,18 +7613,17 @@ class Axes(_AxesBase):
 
         # Render medians
         if showmedians:
-            artists['cmedians'] = perp_lines(medians,
-                                             pmins,
-                                             pmaxes,
+            artists['cmedians'] = perp_lines(medians, pmins, pmaxes,
                                              colors=edgecolor)
+
         # Render percentiles
-        if showpercentiles:
-            artists['percentiles'] = []
-            for i in range(0, len(percentiles)):
-                artists['percentiles'].append(perp_lines(percentiles[i],
-                                                         pmins[i],
-                                                         pmaxes[i],
-                                                         colors='k'))
+        artists['percentiles'] = []
+        for pcs, pmin, pmax in zip(percentiles, pmins, pmaxes):
+            linelen = pmax - pmin
+            artists['percentiles'].append(perp_lines(pcs,
+                                                     pmin + linelen * 0.2,
+                                                     pmax - linelen * 0.2,
+                                                     colors=edgecolor))
 
         return artists
 
