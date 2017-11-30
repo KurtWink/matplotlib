@@ -2047,7 +2047,7 @@ def _reshape_2D(X, name):
         raise ValueError("{} must have 2 or fewer dimensions".format(name))
 
 
-def violin_stats(X, method, points=100):
+def violin_stats(X, method, points=100, percentiles=[]):
     """
     Returns a list of dictionaries of data which can be used to draw a series
     of violin plots. See the `Returns` section below to view the required keys
@@ -2093,7 +2093,13 @@ def violin_stats(X, method, points=100):
     # Want X to be a list of data sequences
     X = _reshape_2D(X, "X")
 
-    for x in X:
+    if percentiles is None:
+        percentiles = []
+    percentiles = _reshape_2D(percentiles, "percentiles")
+    while len(percentiles) < len(X):
+        percentiles.append([])
+
+    for x, pcs in zip(X, percentiles):
         # Dictionary of results for this distribution
         stats = {}
 
@@ -2111,7 +2117,7 @@ def violin_stats(X, method, points=100):
         stats['median'] = np.median(x)
         stats['min'] = min_val
         stats['max'] = max_val
-        stats['percentiles'] = np.percentile(x, [1.0, 35.0, 65.0, 99.0]) ###input params should be used instead of this list
+        stats['percentiles'] = np.percentile(x, pcs)
 
         # Append to output
         vpstats.append(stats)
