@@ -7494,6 +7494,10 @@ class Axes(_AxesBase):
         showmedians : bool, default = False
           If true, will toggle rendering of the medians.
 
+        percentiles : array-like, default = []
+          Displays percentiles in the plot for all the given percentiles in the set.
+
+
         Returns
         -------
         result : dict

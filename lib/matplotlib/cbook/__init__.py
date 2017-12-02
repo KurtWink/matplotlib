@@ -2071,6 +2071,9 @@ def violin_stats(X, method, points=100, percentiles=[]):
         Defines the number of points to evaluate each of the gaussian kernel
         density estimates at.
 
+    percentiles : array-like, default = []
+        Defines a set of percentiles, if any, that will be displayed per plotted point
+
     Returns
     -------
 
@@ -2085,6 +2088,7 @@ def violin_stats(X, method, points=100, percentiles=[]):
         - median: The median value for this column of data.
         - min: The minimum value for this column of data.
         - max: The maximum value for this column of data.
+        - percentiles: The set of percentiles that will be rendered for this data.
     """
 
     # List of dictionaries describing each of the violins.
