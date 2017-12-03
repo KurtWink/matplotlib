@@ -7626,10 +7626,10 @@ class Axes(_AxesBase):
                                              colors=edgecolor)
 
         # Render percentiles
-        artists['percentiles'] = []
+        artists['cpercentiles'] = []
         for pcs, pmin, pmax in zip(percentiles, pmins, pmaxes):
             linelen = pmax - pmin
-            artists['percentiles'].append(perp_lines(pcs,
+            artists['cpercentiles'].append(perp_lines(pcs,
                                                      pmin + linelen * 0.2,
                                                      pmax - linelen * 0.2,
                                                      colors=edgecolor))
