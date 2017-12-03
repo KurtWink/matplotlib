@@ -7533,6 +7533,11 @@ class Axes(_AxesBase):
               :class:`matplotlib.collections.LineCollection` instance
               created to identify the median values of each of the
               violin's distribution.
+              
+            - ``cpercentiles``: A
+              :class:`matplotlib.collections.LineCollection` instance
+              created to identify the percentiles values of each of the
+              violin's distribution.
 
         """
 
