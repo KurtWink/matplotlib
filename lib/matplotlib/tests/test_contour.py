@@ -11,8 +11,6 @@ from numpy.testing import assert_array_almost_equal
 import pytest
 import warnings
 
-import re
-
 
 def test_contour_shape_1d_valid():
 
@@ -140,6 +138,25 @@ def test_contour_empty_levels():
     fig, ax = plt.subplots()
     with pytest.warns(UserWarning) as record:
         ax.contour(x, x, z, levels=[])
+    assert len(record) == 1
+
+
+def test_contour_badlevel_fmt():
+    # test funny edge case from
+    # https://github.com/matplotlib/matplotlib/issues/9742
+    # User supplied fmt for each level as a dictionary, but
+    # MPL changed the level to the minimum data value because
+    # no contours possible.
+    # This would error out pre
+    # https://github.com/matplotlib/matplotlib/pull/9743
+    x = np.arange(9)
+    z = np.zeros((9, 9))
+
+    fig, ax = plt.subplots()
+    fmt = {1.: '%1.2f'}
+    with pytest.warns(UserWarning) as record:
+        cs = ax.contour(x, x, z, levels=[1.])
+        ax.clabel(cs, fmt=fmt)
     assert len(record) == 1
 
 
