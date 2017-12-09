@@ -7437,7 +7437,7 @@ class Axes(_AxesBase):
             return kde.evaluate(coords)
 
         vpstats = cbook.violin_stats(dataset, _kde_method, points=points,
-                           percentiles=percentiles)
+                                     percentiles=percentiles)
         return self.violin(vpstats, positions=positions, vert=vert,
                            widths=widths, showmeans=showmeans,
                            showextrema=showextrema, showmedians=showmedians)
@@ -7630,9 +7630,9 @@ class Axes(_AxesBase):
         for pcs, pmin, pmax in zip(percentiles, pmins, pmaxes):
             linelen = pmax - pmin
             artists['cpercentiles'].append(perp_lines(pcs,
-                                                     pmin + linelen * 0.2,
-                                                     pmax - linelen * 0.2,
-                                                     colors=edgecolor))
+                                                      pmin + linelen * 0.2,
+                                                      pmax - linelen * 0.2,
+                                                      colors=edgecolor))
 
         return artists
 
