@@ -7409,6 +7409,9 @@ class Axes(_AxesBase):
 
         showmedians : bool, default = False
           If `True`, will toggle rendering of the medians.
+        
+        percentiles : array-like, default = []
+          Displays percentiles in the plot for all the given percentiles in the set.
 
         points : scalar, default = 100
           Defines the number of points to evaluate each of the
@@ -7456,6 +7459,11 @@ class Axes(_AxesBase):
             - ``cmedians``: A
               :class:`matplotlib.collections.LineCollection` instance
               created to identify the median values of each of the
+              violin's distribution.
+              
+            - ``cpercentiles``: A
+              :class:`matplotlib.collections.LineCollection` instance
+              created to identify the percentiles values of each of the
               violin's distribution.
         """
 
@@ -7523,10 +7531,6 @@ class Axes(_AxesBase):
 
         showmedians : bool, default = False
           If true, will toggle rendering of the medians.
-
-        percentiles : array-like, default = []
-          Displays percentiles in the plot for all the given percentiles in the set.
-
 
         Returns
         -------
