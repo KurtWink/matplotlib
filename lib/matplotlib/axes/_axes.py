@@ -7411,7 +7411,8 @@ class Axes(_AxesBase):
           If `True`, will toggle rendering of the medians.
         
         percentiles : array-like, default = []
-          Displays percentiles in the plot for all the given percentiles in the set.
+          Displays percentiles in the plot for all the given percentiles 
+          in the set.
 
         points : scalar, default = 100
           Defines the number of points to evaluate each of the
@@ -7509,6 +7510,8 @@ class Axes(_AxesBase):
           - ``min``: The minimum value for this violin's dataset.
 
           - ``max``: The maximum value for this violin's dataset.
+          
+          - ``percentiles``: The set of percentiles for this violin's dataset.
 
         positions : array-like, default = [1, 2, ..., n]
           Sets the positions of the violins. The ticks and limits are
